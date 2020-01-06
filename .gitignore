@@ -5,4 +5,5 @@
 **/.mvn
 **mvnw
 **mvnw.cmd
+*.iml
 
