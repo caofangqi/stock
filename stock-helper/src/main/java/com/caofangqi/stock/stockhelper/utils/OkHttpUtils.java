@@ -1,7 +1,6 @@
 package com.caofangqi.stock.stockhelper.utils;
 
 import okhttp3.*;
-import org.apache.tomcat.util.ExceptionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +25,33 @@ public class OkHttpUtils {
     @Autowired
     public OkHttpUtils(OkHttpClient  okHttpClient) {
         this.okHttpClient= okHttpClient;
+    }
+
+    /**
+     * get
+     * @param url     请求的url
+     * @param param 请求的参数，在浏览器？后面的数据，没有可以传null
+     * @return
+     */
+    public  String get(String url,String param) {
+        String responseBody = "";
+        Request request = new Request.Builder()
+                .url(url+param)
+                .build();
+        Response response = null;
+        try {
+            response = okHttpClient.newCall(request).execute();
+            if (response.isSuccessful()) {
+                return response.body().string();
+            }
+        } catch (Exception e) {
+            logger.error("OkHttp3 put error >> ex =",e);
+        } finally {
+            if (response != null) {
+                response.close();
+            }
+        }
+        return null;
     }
 
     /**
