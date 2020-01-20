@@ -5,5 +5,12 @@ package com.caofangqi.stock.stockhelper.utils;
  */
 public class MoneyUtils {
 
-     
+
+    /**
+     * 元转成厘
+     */
+    public static Long yuanToLi(String value){
+        double d = Double.parseDouble(value);
+        return (long)d * 1000;
+    }
 }

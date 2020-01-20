@@ -4,6 +4,7 @@ import com.caofangqi.stock.stockhelper.constants.StockQuotationApiConstants;
 import com.caofangqi.stock.stockhelper.domain.dto.StockQuotationDTO;
 import com.caofangqi.stock.stockhelper.domain.req.SinaStockQuotationReq;
 import com.caofangqi.stock.stockhelper.domain.req.StockApiParam;
+import com.caofangqi.stock.stockhelper.utils.MoneyUtils;
 import com.caofangqi.stock.stockhelper.utils.OkHttpUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -43,9 +44,10 @@ public class SinaStockQuotationApi  extends AbstractStockQuotationApi<SinaStockQ
                 .code(param.getStockCode())
                 .exchange(param.getExchange())
                 .name(sq[0])
-                .open(Long.parseLong(sq[1])*1000)
-                .yesterdayClose(Long.parseLong(sq[2])*1000)
-                .current(Long.parseLong(sq[3])*1000)
+                .open(MoneyUtils.yuanToLi(sq[1]))
+                .yesterdayClose(MoneyUtils.yuanToLi(sq[2]))
+                .current(MoneyUtils.yuanToLi(sq[3]))
+
 
                 .build();
 
