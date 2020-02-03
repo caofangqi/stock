@@ -11,13 +11,15 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.time.LocalDate;
 
 /**
+ * 获取当前行情
  * @author caofangqi created at 2020/1/11 8:19 下午
  */
 @Component
 @Slf4j
-public class SinaStockQuotationApi  extends AbstractStockQuotationApi<SinaStockQuotationReq> {
+public class SinaStockCurrentQuotationApi extends AbstractStockQuotationApi<SinaStockQuotationReq> {
 
 
     @Resource
@@ -39,7 +41,7 @@ public class SinaStockQuotationApi  extends AbstractStockQuotationApi<SinaStockQ
         }
         log.info("新浪请求接口返回数据:"+result);
         String [] sq = result.replace("var hq_str_sz002427=\"","").replace("\";","").split(",");
-        StockQuotationDTO
+       return StockQuotationDTO
                 .builder()
                 .code(param.getStockCode())
                 .exchange(param.getExchange())
@@ -47,11 +49,10 @@ public class SinaStockQuotationApi  extends AbstractStockQuotationApi<SinaStockQ
                 .open(MoneyUtils.yuanToLi(sq[1]))
                 .yesterdayClose(MoneyUtils.yuanToLi(sq[2]))
                 .current(MoneyUtils.yuanToLi(sq[3]))
-
-
+                .high(MoneyUtils.yuanToLi(sq[4]))
+                .low(MoneyUtils.yuanToLi(sq[5]))
+                .date(LocalDate.parse(sq[30]))
                 .build();
-
-        return null;
     }
 
     @Override

@@ -11,11 +11,11 @@ import javax.annotation.Resource;
  * @author caofangqi created at 2020/1/11 10:08 下午
  */
 @SpringBootTest
-public class SinaStockQuotationApiTest {
+public class SinaStockCurrentQuotationApiTest {
 
 
     @Resource
-    SinaStockQuotationApi sinaStockQuotationApi;
+    SinaStockCurrentQuotationApi sinaStockCurrentQuotationApi;
 
 
     @Test
@@ -24,7 +24,7 @@ public class SinaStockQuotationApiTest {
                 .stockCode("002427")
                 .exchange(EnumExchange.SZ_EXCHANGE)
                 .build();
-        sinaStockQuotationApi.execute(param);
+        System.out.printf(">>>>>>>:"+ sinaStockCurrentQuotationApi.execute(param));
 
     }
 

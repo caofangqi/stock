@@ -60,7 +60,7 @@ public class StockQuotationDTO implements Serializable {
     /**
      * 日期
      */
-    private LocalDate time;
+    private LocalDate date;
 
 
 
