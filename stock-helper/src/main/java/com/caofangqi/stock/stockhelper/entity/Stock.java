@@ -25,7 +25,7 @@ public class Stock implements Serializable {
     /**
      * 主键
      */
-    private Integer id;
+    private Long id;
 
     /**
      * 股票代码
@@ -49,6 +49,7 @@ public class Stock implements Serializable {
 
     /**
      * 股票标记 flag 我对于股票的定义
+     * @see com.caofangqi.stock.stockhelper.enums.EnumStockFlag
      */
     private Integer flag;
 

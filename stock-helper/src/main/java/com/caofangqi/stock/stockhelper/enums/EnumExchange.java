@@ -1,5 +1,7 @@
 package com.caofangqi.stock.stockhelper.enums;
 
+import java.util.Arrays;
+
 /**
  * @author caofangqi created at 2020/1/11 6:21 下午
  */
@@ -30,12 +32,10 @@ public enum  EnumExchange {
         return value;
     }
 
-    public void setValue(Integer value) {
-        this.value = value;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public static EnumExchange getEnumExchange(Integer value){
+        return Arrays.stream(EnumExchange.values())
+                .filter(v->v.getValue().equals(value))
+                .findFirst().orElse(null);
     }
 
     EnumExchange(Integer value, String code, String name) {

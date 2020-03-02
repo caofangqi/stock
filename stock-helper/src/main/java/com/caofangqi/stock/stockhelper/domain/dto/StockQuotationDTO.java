@@ -21,6 +21,10 @@ public class StockQuotationDTO implements Serializable {
 
     private static final long serialVersionUID = -2183706988998890068L;
     /**
+     * stock 表主键ID
+     */
+    private Long stockId;
+    /**
      * 股票代码
      */
     private String code;
@@ -61,6 +65,12 @@ public class StockQuotationDTO implements Serializable {
      * 日期
      */
     private LocalDate date;
+
+    /**
+     * 日期类型
+     * @see com.caofangqi.stock.stockhelper.enums.EnumDateType
+     */
+    private Integer dateType;
 
 
 
