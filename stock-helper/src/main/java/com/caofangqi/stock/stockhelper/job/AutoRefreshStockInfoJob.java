@@ -34,22 +34,27 @@ public class AutoRefreshStockInfoJob {
 
     @Scheduled(cron = "0 0/1 * * * *")
     public void autoRefreshStockInfo() {
-        List<Stock> stockList = stockManager.getRequireRefreshInfoStock();
 
-        stockList
-                .parallelStream()
-                .forEach(stock -> {
-                    StockQuotationDTO quotation = sinaStockCurrentQuotationApi.execute(
-                            StockApiParam
-                                    .builder()
-                                    .exchange(EnumExchange.getEnumExchange(stock.getExchange()))
-                                    .stockCode(stock.getCode())
-                                    .build()
-                    );
-                    quotation.setStockId(stock.getId());
-                    quotation.setDateType(EnumDateType.DAY.getCode());
-                    stockQuotationManager.insertOrUpdate(quotation);
-                });
+        try {
+            List<Stock> stockList = stockManager.getRequireRefreshInfoStock();
+
+            stockList
+                    .parallelStream()
+                    .forEach(stock -> {
+                        StockQuotationDTO quotation = sinaStockCurrentQuotationApi.execute(
+                                StockApiParam
+                                        .builder()
+                                        .exchange(EnumExchange.getEnumExchange(stock.getExchange()))
+                                        .stockCode(stock.getCode())
+                                        .build()
+                        );
+                        quotation.setStockId(stock.getId());
+                        quotation.setDateType(EnumDateType.DAY.getCode());
+                        stockQuotationManager.insertOrUpdate(quotation);
+                    });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
