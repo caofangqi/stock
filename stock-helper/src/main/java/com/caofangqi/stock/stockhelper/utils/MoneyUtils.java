@@ -11,6 +11,6 @@ public class MoneyUtils {
      */
     public static Long yuanToLi(String value){
         double d = Double.parseDouble(value);
-        return (long)d * 1000;
+        return (long)(d * 1000);
     }
 }
