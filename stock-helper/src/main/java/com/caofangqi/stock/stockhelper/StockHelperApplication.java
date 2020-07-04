@@ -22,7 +22,7 @@ public class StockHelperApplication {
     public OkHttpClient okHttpClient() {
         return new OkHttpClient.Builder()
                 //.sslSocketFactory(sslSocketFactory(), x509TrustManager())
-                .retryOnConnectionFailure(false)
+                .retryOnConnectionFailure(true)
                 .connectionPool(pool())
                 .connectTimeout(30, TimeUnit.SECONDS)
                 .readTimeout(30, TimeUnit.SECONDS)
